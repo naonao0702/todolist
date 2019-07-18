@@ -19,7 +19,7 @@ class CreateTodoTable extends Migration
             $table->string('space');
             $table->date('deadline');
             $table->boolean('is_complete');
-            $table->int('priority');
+            $table->integer('priority');
             $table->timestamps();
 
         });
