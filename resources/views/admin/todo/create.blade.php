@@ -32,13 +32,20 @@
                     <div class="form-group row">
                         <label class="col-md-2" for="deadline">期限</label>
                         <div class="col-md-10">
-                            <input type="datetime-local" class="form-control" name="deadline" value="{{ old('deadline') }}">
+                            <input type="date" class="form-control" name="deadline" value="{{ old('deadline') }}">
                         </div>
                     </div>
+
                     <div class="form-group row">
                         <label class="col-md-2" for="priority">重要度</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="priority" value="{{ old('priority') }}">
+                          <select class="form-control" name="priority" min="1" max="5" value="{{ old('priority') }}">
+                            <?php
+                            for ($i = 1; $i <=5; $i++) {
+                               print ('<option value="' . $i. '">' . $i . '</option>');
+                               }
+                               ?>
+                            </select>
                         </div>
                     </div>
 

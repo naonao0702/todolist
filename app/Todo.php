@@ -13,6 +13,7 @@ class Todo extends Model
       'title' => 'required',
       'space' => 'required',
       'deadline' => 'date',
-      'priority' => 'required',
+      'priority' => 'digits_between:1,5',
+      'user_id' => 'integer',
   );
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Todo;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Support\Facades\Auth;    #追加してください。
+
 
 
 
@@ -28,6 +30,8 @@ class TodoController extends Controller
     unset($form['_token']);
     $todo->fill($form);
     $todo->is_complete = 0;
+    $user = Auth::user();
+    $todo->user_id = $user->id;
     // データベースに保存する
 
     $todo->save();
@@ -36,13 +40,17 @@ class TodoController extends Controller
   public function index(Request $request)
   {
     $cond_title = $request->cond_title;
+    $todo = new Todo;
+    $todo = $todo->all();
+    $user = Auth::user();
+
 
     if ($cond_title != '') {
       // 検索されたら検索結果を取得する
       $todos = Todo::where('title', 'like' , '%' . $cond_title . '%')->get();
     } else {
       // それ以外はすべてのニュースを取得する
-      $todos = Todo::where('is_complete',0)
+      $todos = Todo::where('is_complete', 0)->where('user_id', $user->id)
       ->orderBy('priority', 'desc')
       ->get();
     }
