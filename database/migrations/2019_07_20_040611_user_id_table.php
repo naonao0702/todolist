@@ -14,7 +14,7 @@ class UserIdTable extends Migration
   public function up()
   {
     Schema::table('todos', function (Blueprint $table) {
-      $table->increments('user_id');
+      $table->integer('user_id');
 
     });
   }
